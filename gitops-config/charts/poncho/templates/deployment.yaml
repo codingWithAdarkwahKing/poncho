@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ default .Values.app.fullnameOverride .Release.Name }}
+  namespace: {{ default .Values.app.namespace .Release.Namespace }}
+  labels:
+    app: {{ default .Values.app.fullnameOverride .Release.Name }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ default .Values.app.fullnameOverride .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ default .Values.app.fullnameOverride .Release.Name }}
+      annotations:
+        prometheus.io/port: "http"
+        prometheus.io/scrape: "true"
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.app.imagePullSecrets.name }}
+      initContainers:
+        - name: wait-for-mongodb
+          image: busybox
+          command: ["sh", "-c", "sleep 100"]
+      containers:
+        - name: {{ default .Values.app.fullnameOverride .Release.Name }}
+          imagePullPolicy: {{ .Values.app.image.pullPolicy }}
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.app.containerPort }}
+          resources:
+            requests:
+              memory: "{{ .Values.app.resources.requests.memory }}"
+              cpu: "{{ .Values.app.resources.requests.cpu }}"
+            limits:
+              memory: "{{ .Values.app.resources.limits.memory }}"
+              cpu: "{{ .Values.app.resources.limits.cpu }}"
+          envFrom:
+            - secretRef:
+                name: myapp-secrets
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: MY_POD_NAMESPACE
+              value: {{ .Values.app.namespace }}
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: {{ .Values.mongodb.auth.rootUser }}
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo
+                  key: mongodb-root-password
+            - name: MONGO_DB
+              valueFrom:
+                secretKeyRef:
+                  name: mongo
+                  key: mongodb-databases
+            - name: AUTH_SOURCE
+              value: admin
+            - name: DATABASE_HOST
+              value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@{{ .Values.mongodb.service.nameOverride }}.{{ default .Values.app.namespace .Release.Namespace }}.svc.cluster.local:27017/$(MONGO_DB)?authSource=$(AUTH_SOURCE)&replicaSet={{ .Values.mongodb.replicaSetName }}"
+        - name: {{ default .Values.app.fullnameOverride .Release.Name }}-nginx
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tagnginx }}"
+          imagePullPolicy: {{ .Values.app.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.app.nginx.targetPort }}
+          env:
+          - name: MY_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: poncho-nginx-config
+            items:
+              - key: nginx.conf
+                path: nginx.conf

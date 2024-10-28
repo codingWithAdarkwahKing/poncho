@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ default .Values.app.fullnameOverride .Release.Name }}-service
+  # annotations:
+  #   prometheus.io/scrape: "true"
+  #   prometheus.io/port: "80"
+  #   prometheus.io/path: "/metrics"
+  namespace: {{default .Values.app.namespace .Release.Namespace }}
+  labels:
+    app: {{ .Values.service.label }}
+spec:
+{{- if not .Values.ingress.enabled }}
+  type: {{ .Values.Noneingressservice.type }}
+  ports:
+    - port: {{ .Values.Noneingressservice.port }}
+      targetPort: 80
+      name: http
+{{- else }}
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
+      name: http
+{{- end }}
+  selector:
+    app: {{ default .Values.app.fullnameOverride .Release.Name }}

@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: controller
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: "4.9.1"
+    helm:
+      values: |
+        controller:
+          ingressClassResource:
+              enabled: true
+              default: true
+          replicaCount: 2
+          metrics:
+            port: 10254
+            portName: metrics
+            enabled: true
+            service:
+              annotations:
+                prometheus.io/scrape: "true"
+                prometheus.io/port: "10254"
+            serviceMonitor:
+              enabled: true
+              additionalLabels: {}
+              annotations: {}
+              namespace: ""
+              namespaceSelector: {}
+              scrapeInterval: 30s
+              honorLabels: true
+              targetLabels: []
+              relabelings: []
+              metricRelabelings: []
+            prometheusRule:
+              enabled: false
+              additionalLabels: {}
+              rules: []
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ingress
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      # selfHeal: true

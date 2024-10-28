@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: poncho-monitor
+  namespace: poncho-namespace
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.service.label }}
+  endpoints:
+  - port: http
+    interval: 15s
+    path: /metrics
+    scheme: http

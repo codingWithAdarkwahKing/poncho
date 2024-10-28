@@ -1,0 +1,109 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: "56.8.2"
+    helm:
+      values: |
+        namespaceOverride: "kube-prometheus-stack"
+        alertmanager:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+
+            hosts:
+              - seniorasare.mooo.com
+            paths:
+              - /
+          
+          alertmanagerSpec:
+            storage:
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: "standard"
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 2Gi
+        grafana:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+            hosts:
+              - grafana.kingasare.crabdance.com	
+            path: /
+          persistence:
+            enabled: true
+            type: sts
+            storageClassName: "standard"
+            accessModes:
+              - ReadWriteOnce
+            size: 5Gi
+
+
+        prometheus:
+          scrapeInterval: 1m
+          evaluationInterval: 1m
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+            hosts:
+              - prometheus.spyfie.chickenkiller.com	
+            paths:
+              - /
+          prometheusSpec:
+            podMonitorSelectorNilUsesHelmValues: false
+            serviceMonitorSelectorNilUsesHelmValues: false
+            additionalScrapeConfigs:
+              - job_name: ingress-controller
+                honor_timestamps: true
+                scrape_interval: 1m
+                scrape_timeout: 1m
+                metrics_path: /metrics
+                scheme: http
+                static_configs:
+                  - targets:
+                      - controller-ingress-nginx-controller-metrics.ingress.svc.cluster.local:10254
+              - job_name: cert-manager
+                honor_timestamps: true
+                scrape_interval: 1m
+                scrape_timeout: 1m
+                metrics_path: /metrics
+                scheme: http
+                static_configs:
+                  - targets:
+                      - cert-manager.cert-manager.svc.cluster.local:9402
+              - job_name: poncho-app
+                honor_timestamps: true
+                scrape_interval: 1m
+                scrape_timeout: 1m
+                metrics_path: /metrics
+                scheme: http
+                static_configs:
+                  - targets:
+                      - poncho-application-git-service.poncho-namespace.svc.cluster.local:80  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-prometheus-stack
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+

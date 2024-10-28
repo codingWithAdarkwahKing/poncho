@@ -1,0 +1,91 @@
+app:
+  fullnameOverride: poncho
+  namespace: poncho-namespace
+  replicaCount: 3
+  image:
+    repository: 644435390668.dkr.ecr.ap-south-1.amazonaws.com/king-poncho
+    tag: app-1.0.9
+    tagnginx: nginx-1.0.9
+    pullPolicy: IfNotPresent
+  imagePullSecrets:
+    name: regcred
+  nginx:
+    targetPort: 80
+  resources:
+    requests:
+      cpu: "0.1"
+      memory: "64Mi"
+    limits:
+      cpu: "1"
+      memory: "512Mi"
+
+  containerPort: 8000
+
+mongodb:
+  enabled: true
+  fullnameOverride: mongo
+  architecture: replicaset
+  persistence:
+    enabled: true
+    storageClass: "poncho-standard"
+    accessModes:
+      - ReadWriteOnce
+    size: 1Gi
+  replicaSetName: rs0
+  arbiter:
+    enable: true
+  replicaCount: 3
+  auth:
+    existingSecret: "mongo"
+    enabled: true
+    rootUser: admin
+  terminationGracePeriodSeconds: "10"
+  service:
+    nameOverride: "mongodb-svc"
+  resources:
+    requests:
+      cpu: "0.2"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "512Mi"
+
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hostName: king-poncho.bounceme.net
+  portNumber: 80
+  path: /
+  pathType: Prefix
+  secretName : letsencrypt-nginx
+
+
+issuer:
+  enabled: true
+  name: letsencrypt-nginx
+  email: adarkwahking4@gmail.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+  privateKeySecretRef:
+    name: letsencrypt-nginx-private-key
+
+service:
+  type: ClusterIP
+  port: 80
+  label: poncho-svc
+
+
+Noneingressservice:
+  type: LoadBalancer
+  port: 80
+
+nameOverride: poncho
+
+storageClass:
+  name: poncho-standard
+  provisioner: pd.csi.storage.gke.io
+  volumeBindingMode: WaitForFirstConsumer
+  reclaimPolicy: Delete
+  allowVolumeExpansion: true
+  parameters:
+    type: pd-standard

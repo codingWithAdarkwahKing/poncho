@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: poncho-application-git
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@gitlab.com:kingasare/poncho-gitops-conf.git
+    targetRevision: HEAD
+    path: ./charts/poncho
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: poncho-namespace
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      # selfHeal: true
+      prune: true

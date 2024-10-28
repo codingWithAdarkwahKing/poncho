@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-private-ssh-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+stringData:
+  url: git@gitlab.com:kingasare/poncho-gitops-conf.git
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    Hey there!!, Got you!!
+    -----END OPENSSH PRIVATE KEY-----

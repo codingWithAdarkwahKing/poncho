@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elasticsearch
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: elasticsearch
+    targetRevision: "19.17.5"
+    helm:
+      values: |
+        master:
+          replicaCount: 1
+
+        data:
+          replicaCount: 1
+
+        ingest:
+          replicaCount: 1
+
+        coordinating:
+          replicaCount: 1
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: efk
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+
