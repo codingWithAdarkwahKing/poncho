@@ -1,0 +1,11 @@
+master:
+  replicaCount: 1
+
+data:
+  replicaCount: 1
+
+ingest:
+  replicaCount: 1
+
+cordinating:
+  replicaCount: 1

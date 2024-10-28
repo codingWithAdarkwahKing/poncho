@@ -1,0 +1,15 @@
+crds:
+  install: true
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - asare.chickenkiller.com
+    configs:
+      secret:
+        argocdServerAdminPassword: $2a$12$2yIimA3xKzpq3xl348I9YeCDGXX84ZSoFJtwTzp/637ngxXjYU3C.
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      insecure: true
+      ingressClassName: "nginx"

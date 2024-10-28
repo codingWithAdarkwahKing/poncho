@@ -1,0 +1,42 @@
+controller:
+  ingressClassResource:
+      enabled: true
+      default: true
+  replicaCount: 2
+# resources:
+#     requests:
+#       cpu: 50m 
+#       memory: 64Mi
+#     limits:
+#       cpu: 100m
+#       memory: 128Mi  
+  metrics:
+    port: 10254
+    portName: metrics
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
+    serviceMonitor:
+      enabled: true
+      additionalLabels: {}
+      annotations: {}
+      ## The label to use to retrieve the job name from.
+      ## jobLabel: "app.kubernetes.io/name"
+      namespace: ""
+      namespaceSelector: {}
+      ## Default: scrape .Release.Namespace or namespaceOverride only
+      ## To scrape all, use the following:
+      ## namespaceSelector:
+      ##   any: true
+      scrapeInterval: 30s
+      honorLabels: true
+      targetLabels: []
+      relabelings: []
+      metricRelabelings: []
+    prometheusRule:
+      enabled: false
+      additionalLabels: {}
+      # namespace: ""
+      rules: []

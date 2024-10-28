@@ -1,0 +1,16 @@
+# Starter Kit default values for cert-manager.
+
+# CRDs are required usually
+installCRDs: true
+
+# Required only if you want to monitor cert-manager activity  
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: true
+    prometheusInstance: default
+    targetPort: 9402
+    path: /metrics
+    interval: 60s
+    scrapeTimeout: 30s
+    honorLabels: true
