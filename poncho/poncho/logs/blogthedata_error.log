@@ -1,0 +1,563 @@
+WARNING 2024-02-12 12:37:37,383 django.request Thread-1 (process_request_thread) 140139665806912 log log.py 225 django.request log_response 102550 Not Found: /king
+WARNING 2024-02-12 12:37:37,383 django.server Thread-1 (process_request_thread) 140139665806912 basehttp basehttp.py 179 django.server log_message 102550 "GET /king HTTP/1.1" 404 3756
+WARNING 2024-02-12 12:38:36,578 django.request Thread-1 (process_request_thread) 140139665806912 log log.py 225 django.request log_response 102550 Not Found: /king
+WARNING 2024-02-12 12:38:36,579 django.server Thread-1 (process_request_thread) 140139665806912 basehttp basehttp.py 179 django.server log_message 102550 "GET /king HTTP/1.1" 404 3756
+WARNING 2024-02-12 12:38:53,053 django.request Thread-1 (process_request_thread) 140139665806912 log log.py 225 django.request log_response 102550 Not Found: /login
+WARNING 2024-02-12 12:38:53,054 django.server Thread-1 (process_request_thread) 140139665806912 basehttp basehttp.py 179 django.server log_message 102550 "GET /login HTTP/1.1" 404 3759
+WARNING 2024-02-13 10:37:03,489 django.request Thread-1 (process_request_thread) 140138315236928 log log.py 225 django.request log_response 37325 Not Found: /favicon.ico
+WARNING 2024-02-13 10:37:03,490 django.server Thread-1 (process_request_thread) 140138315236928 basehttp basehttp.py 179 django.server log_message 37325 "GET /favicon.ico HTTP/1.1" 404 3777
+ERROR 2024-02-13 10:55:06,382 django.request Thread-1 (process_request_thread) 140376669136448 log log.py 225 django.request log_response 47977 Internal Server Error: /api/workout/
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/renderers.py", line 722, in render
+    template = loader.get_template(self.template)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: rest_framework/api.html
+ERROR 2024-02-13 10:55:06,383 django.server Thread-1 (process_request_thread) 140376669136448 basehttp basehttp.py 179 django.server log_message 47977 "GET /api/workout/ HTTP/1.1" 500 95836
+WARNING 2024-02-13 10:58:42,252 django.request Thread-1 (process_request_thread) 140226001344064 log log.py 225 django.request log_response 50242 Not Found: /home/
+WARNING 2024-02-13 10:58:42,252 django.server Thread-1 (process_request_thread) 140226001344064 basehttp basehttp.py 179 django.server log_message 50242 "GET /home/ HTTP/1.1" 404 3698
+WARNING 2024-02-13 10:58:47,701 django.request Thread-1 (process_request_thread) 140226001344064 log log.py 225 django.request log_response 50242 Not Found: /home
+WARNING 2024-02-13 10:58:47,701 django.server Thread-1 (process_request_thread) 140226001344064 basehttp basehttp.py 179 django.server log_message 50242 "GET /home HTTP/1.1" 404 3695
+ERROR 2024-02-13 11:34:39,253 django.request Thread-1 (process_request_thread) 140708212102720 log log.py 225 django.request log_response 66866 Internal Server Error: /api/home/
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 189, in render
+    template = context.template.engine.select_template(template_name)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/engine.py", line 200, in select_template
+    raise TemplateDoesNotExist(', '.join(not_found))
+django.template.exceptions.TemplateDoesNotExist: templates/mysite/snippets/home_css.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/poncho/mysite/views.py", line 7, in home_view
+    return render(request, 'mysite/home.html')
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 63, in render
+    reraise(exc, self.backend)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: templates/mysite/snippets/home_css.html
+ERROR 2024-02-13 11:34:39,255 django.server Thread-1 (process_request_thread) 140708212102720 basehttp basehttp.py 179 django.server log_message 66866 "GET /api/home/ HTTP/1.1" 500 179245
+ERROR 2024-02-13 12:32:40,495 django.request Thread-16 (process_request_thread) 140704806336064 log log.py 225 django.request log_response 87174 Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/sessions/backends/base.py", line 180, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/djongo/sql2mongo/query.py", line 808, in __iter__
+    yield from iter(self._query)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/djongo/sql2mongo/query.py", line 166, in __iter__
+    for doc in cursor:
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/cursor.py", line 1238, in next
+    if len(self.__data) or self._refresh():
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/cursor.py", line 1130, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/mongo_client.py", line 1935, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/mongo_client.py", line 1883, in __start_session
+    server_session = self._get_server_session()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/mongo_client.py", line 1921, in _get_server_session
+    return self._topology.get_server_session()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/topology.py", line 520, in get_server_session
+    session_timeout = self._check_session_support()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/topology.py", line 504, in _check_session_support
+    self._select_servers_loop(
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/pymongo/topology.py", line 218, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: No replica set members found yet, Timeout: 5.0s, Topology Description: <TopologyDescription id: 65cb5a86a5a48480a5c203a7, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-9hwmrv5-shard-00-00.vxupnz9.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-9hwmrv5-shard-00-01.vxupnz9.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-9hwmrv5-shard-00-02.vxupnz9.mongodb.net', 27017) server_type: Unknown, rtt: None>]>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/djongo/cursor.py", line 65, in fetchmany
+    ret.append(self.result.next())
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/djongo/sql2mongo/query.py", line 797, in __next__
+    result = next(self._result_generator)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/djongo/sql2mongo/query.py", line 830, in __iter__
+    raise exe from e
+djongo.exceptions.SQLDecodeError: 
+
+	Keyword: FAILED SQL: SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."expire_date" > %(0)s AND "django_session"."session_key" = %(1)s) LIMIT 21
+Params: (datetime.datetime(2024, 2, 13, 12, 32, 32, 925862), 'hcwk0vt8czwr1wjvgo7jxlae2hrd95ha')
+Version: 1.3.6
+	Sub SQL: None
+	FAILED SQL: None
+	Params: None
+	Version: None
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/utils.py", line 97, in inner
+    return func(*args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/djongo/cursor.py", line 70, in fetchmany
+    raise db_exe from e
+djongo.database.DatabaseError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/utils/decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/poncho/accounts/views.py", line 11, in signup_view
+    if request.user.is_authenticated:
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/utils/functional.py", line 248, in inner
+    self._setup()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/utils/functional.py", line 384, in _setup
+    self._wrapped = self._setupfunc()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/auth/middleware.py", line 25, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/auth/middleware.py", line 11, in get_user
+    request._cached_user = auth.get_user(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 177, in get_user
+    user_id = _get_user_session_key(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/auth/__init__.py", line 60, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/sessions/backends/base.py", line 50, in __getitem__
+    return self._session[key]
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/sessions/backends/base.py", line 185, in _get_session
+    self._session_cache = self.load()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/sessions/backends/db.py", line 43, in load
+    s = self._get_session_from_db()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/contrib/sessions/backends/db.py", line 32, in _get_session_from_db
+    return self.model.objects.get(
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/query.py", line 435, in get
+    num = len(clone)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/query.py", line 262, in __len__
+    self._fetch_all()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/query.py", line 1354, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1234, in execute_sql
+    return list(result)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1678, in cursor_iter
+    for rows in iter((lambda: cursor.fetchmany(itersize)), sentinel):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1678, in <lambda>
+    for rows in iter((lambda: cursor.fetchmany(itersize)), sentinel):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/utils.py", line 96, in inner
+    with self:
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/db/utils.py", line 97, in inner
+    return func(*args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/djongo/cursor.py", line 70, in fetchmany
+    raise db_exe from e
+django.db.utils.DatabaseError
+ERROR 2024-02-13 12:32:40,498 django.server Thread-16 (process_request_thread) 140704806336064 basehttp basehttp.py 179 django.server log_message 87174 "GET / HTTP/1.1" 500 246759
+ERROR 2024-02-13 12:33:18,387 django.request Thread-16 (process_request_thread) 140704806336064 log log.py 225 django.request log_response 87174 Internal Server Error: /api/workout/
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/urls/base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+KeyError: 'rest_framework'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/renderers.py", line 724, in render
+    ret = template.render(context, request=renderer_context['request'])
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/defaulttags.py", line 445, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/urls/base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'rest_framework' is not a registered namespace
+ERROR 2024-02-13 12:33:18,389 django.server Thread-16 (process_request_thread) 140704806336064 basehttp basehttp.py 179 django.server log_message 87174 "GET /api/workout/ HTTP/1.1" 500 329960
+ERROR 2024-02-13 12:34:12,366 django.request Thread-16 (process_request_thread) 140704806336064 log log.py 225 django.request log_response 87174 Internal Server Error: /api/workout/
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/urls/base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+KeyError: 'rest_framework'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/renderers.py", line 724, in render
+    ret = template.render(context, request=renderer_context['request'])
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/defaulttags.py", line 445, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/urls/base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'rest_framework' is not a registered namespace
+ERROR 2024-02-13 12:34:12,367 django.server Thread-16 (process_request_thread) 140704806336064 basehttp basehttp.py 179 django.server log_message 87174 "GET /api/workout/ HTTP/1.1" 500 329974
+ERROR 2024-02-13 12:37:14,968 django.request Thread-16 (process_request_thread) 140704806336064 log log.py 225 django.request log_response 87174 Internal Server Error: /api/workout/
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 130, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 127, in get_parent
+    return self.find_template(parent, context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 106, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/engine.py", line 149, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: accounts/base.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/rest_framework/renderers.py", line 724, in render
+    ret = template.render(context, request=renderer_context['request'])
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 63, in render
+    reraise(exc, self.backend)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: accounts/base.html
+ERROR 2024-02-13 12:37:14,970 django.server Thread-16 (process_request_thread) 140704806336064 basehttp basehttp.py 179 django.server log_message 87174 "GET /api/workout/ HTTP/1.1" 500 190641
+WARNING 2024-02-13 14:52:29,354 django.request Thread-1 (process_request_thread) 140616952440384 log log.py 225 django.request log_response 154324 Not Found: /favicon.ico
+WARNING 2024-02-13 14:52:29,359 django.server Thread-1 (process_request_thread) 140616952440384 basehttp basehttp.py 179 django.server log_message 154324 "GET /favicon.ico HTTP/1.1" 404 3716
+WARNING 2024-02-13 19:55:36,189 django.request Thread-1 (process_request_thread) 140003183162944 log log.py 225 django.request log_response 319645 Not Found: /favicon.ico
+WARNING 2024-02-13 19:55:36,190 django.server Thread-1 (process_request_thread) 140003183162944 basehttp basehttp.py 179 django.server log_message 319645 "GET /favicon.ico HTTP/1.1" 404 3716
+WARNING 2024-02-13 19:56:21,739 django.server Thread-4 (process_request_thread) 140003686463040 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 19:56:39,054 django.server Thread-5 (process_request_thread) 140003686463040 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 19:57:25,753 django.server Thread-7 (process_request_thread) 140003694855744 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 19:57:35,563 django.server Thread-8 (process_request_thread) 140003711641152 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 19:58:18,766 django.server Thread-9 (process_request_thread) 140003166377536 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 19:59:43,128 django.server Thread-10 (process_request_thread) 140003166377536 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 20:01:18,516 django.server Thread-11 (process_request_thread) 140003166377536 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 20:02:12,358 django.server Thread-12 (process_request_thread) 140003166377536 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 20:03:48,108 django.server Thread-13 (process_request_thread) 140003166377536 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+ERROR 2024-02-13 20:03:54,463 django.request Thread-14 (process_request_thread) 140003166377536 log log.py 225 django.request log_response 319645 Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 125, in __call__
+    response = self.process_request(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/middleware/common.py", line 54, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/middleware/common.py", line 88, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/accounts/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2024-02-13 20:03:54,464 django.server Thread-14 (process_request_thread) 140003166377536 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login HTTP/1.1" 500 82234
+WARNING 2024-02-13 20:04:32,399 django.server Thread-15 (process_request_thread) 140003166377536 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 20:09:36,598 django.server Thread-19 (process_request_thread) 140003183162944 basehttp basehttp.py 179 django.server log_message 319645 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 20:39:25,804 django.server Thread-1 (process_request_thread) 140441102038592 basehttp basehttp.py 179 django.server log_message 346155 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 20:41:23,314 django.request Thread-1 (process_request_thread) 140150394832448 log log.py 225 django.request log_response 346790 Forbidden: /accounts/terminal_login/
+WARNING 2024-02-13 20:41:23,314 django.server Thread-1 (process_request_thread) 140150394832448 basehttp basehttp.py 179 django.server log_message 346790 "POST /accounts/terminal_login/ HTTP/1.1" 403 22
+WARNING 2024-02-13 20:42:49,193 django.request Thread-1 (process_request_thread) 140249808238144 log log.py 225 django.request log_response 347243 Not Found: /favicon.ico
+WARNING 2024-02-13 20:42:49,193 django.server Thread-1 (process_request_thread) 140249808238144 basehttp basehttp.py 179 django.server log_message 347243 "GET /favicon.ico HTTP/1.1" 404 3910
+WARNING 2024-02-13 20:45:31,476 django.request Thread-1 (process_request_thread) 140098637112896 log log.py 225 django.request log_response 348411 Not Found: /accounts/ternimal_login
+WARNING 2024-02-13 20:45:31,477 django.server Thread-1 (process_request_thread) 140098637112896 basehttp basehttp.py 179 django.server log_message 348411 "GET /accounts/ternimal_login HTTP/1.1" 404 3946
+WARNING 2024-02-13 20:46:14,831 django.request Thread-1 (process_request_thread) 139741903177280 log log.py 225 django.request log_response 348870 Not Found: /accounts/ternimal_login
+WARNING 2024-02-13 20:46:14,831 django.server Thread-1 (process_request_thread) 139741903177280 basehttp basehttp.py 179 django.server log_message 348870 "GET /accounts/ternimal_login HTTP/1.1" 404 3945
+WARNING 2024-02-13 20:46:39,376 django.request Thread-1 (process_request_thread) 139741903177280 log log.py 225 django.request log_response 348870 Method Not Allowed: /accounts/terminallogin/
+WARNING 2024-02-13 20:46:39,377 django.server Thread-1 (process_request_thread) 139741903177280 basehttp basehttp.py 179 django.server log_message 348870 "GET /accounts/terminallogin/ HTTP/1.1" 405 19
+WARNING 2024-02-13 20:47:04,508 django.request Thread-3 (process_request_thread) 139741886391872 log log.py 225 django.request log_response 348870 Forbidden: /accounts/terminallogin/
+WARNING 2024-02-13 20:47:04,508 django.server Thread-3 (process_request_thread) 139741886391872 basehttp basehttp.py 179 django.server log_message 348870 "POST /accounts/terminallogin/ HTTP/1.1" 403 22
+WARNING 2024-02-13 20:50:46,448 django.server Thread-4 (process_request_thread) 139741894784576 basehttp basehttp.py 179 django.server log_message 348870 "POST /accounts/login/ HTTP/1.1" 403 2870
+WARNING 2024-02-13 20:51:46,792 django.request Thread-2 (process_request_thread) 140647226930752 log log.py 225 django.request log_response 350891 Forbidden: /accounts/terminallogin/
+WARNING 2024-02-13 20:51:46,793 django.server Thread-2 (process_request_thread) 140647226930752 basehttp basehttp.py 179 django.server log_message 350891 "POST /accounts/terminallogin/ HTTP/1.1" 403 22
+WARNING 2024-02-13 20:52:13,953 django.request Thread-1 (process_request_thread) 140490955531840 log log.py 225 django.request log_response 351367 Forbidden: /accounts/terminallogin/
+WARNING 2024-02-13 20:52:13,954 django.server Thread-1 (process_request_thread) 140490955531840 basehttp basehttp.py 179 django.server log_message 351367 "POST /accounts/terminallogin/ HTTP/1.1" 403 22
+ERROR 2024-02-13 20:52:39,426 django.request Thread-2 (process_request_thread) 140491209983552 log log.py 225 django.request log_response 351367 Internal Server Error: /accounts/terminallogin
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 125, in __call__
+    response = self.process_request(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/middleware/common.py", line 54, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/middleware/common.py", line 88, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/accounts/terminallogin/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2024-02-13 20:52:39,427 django.server Thread-2 (process_request_thread) 140491209983552 basehttp basehttp.py 179 django.server log_message 351367 "POST /accounts/terminallogin HTTP/1.1" 500 82362
+WARNING 2024-02-13 20:53:35,452 django.request Thread-3 (process_request_thread) 140491209983552 log log.py 225 django.request log_response 351367 Forbidden: /accounts/terminallogin/
+WARNING 2024-02-13 20:53:35,453 django.server Thread-3 (process_request_thread) 140491209983552 basehttp basehttp.py 179 django.server log_message 351367 "POST /accounts/terminallogin/ HTTP/1.1" 403 22
+WARNING 2024-02-13 21:03:47,349 django.request Thread-2 (process_request_thread) 139984475493952 log log.py 225 django.request log_response 357294 Not Found: /accounts/api/workout/
+WARNING 2024-02-13 21:03:47,350 django.server Thread-2 (process_request_thread) 139984475493952 basehttp basehttp.py 179 django.server log_message 357294 "GET /accounts/api/workout/ HTTP/1.1" 404 3746
+WARNING 2024-02-13 21:04:21,446 django.request Thread-3 (process_request_thread) 139984475493952 log log.py 225 django.request log_response 357294 Not Found: /accounts/api/workout
+WARNING 2024-02-13 21:04:21,446 django.server Thread-3 (process_request_thread) 139984475493952 basehttp basehttp.py 179 django.server log_message 357294 "GET /accounts/api/workout HTTP/1.1" 404 3743
+WARNING 2024-02-13 21:06:43,805 django.request Thread-4 (process_request_thread) 139984475493952 log log.py 225 django.request log_response 357294 Not Found: /accounts/api/workout
+WARNING 2024-02-13 21:06:43,805 django.server Thread-4 (process_request_thread) 139984475493952 basehttp basehttp.py 179 django.server log_message 357294 "POST /accounts/api/workout HTTP/1.1" 404 3744
+WARNING 2024-02-13 21:07:40,252 django.request Thread-1 (process_request_thread) 139880666474048 log log.py 225 django.request log_response 359158 Not Found: /favicon.ico
+WARNING 2024-02-13 21:07:40,252 django.server Thread-1 (process_request_thread) 139880666474048 basehttp basehttp.py 179 django.server log_message 359158 "GET /favicon.ico HTTP/1.1" 404 3716
+ERROR 2024-02-13 21:08:44,868 django.request Thread-3 (process_request_thread) 139880701093440 log log.py 225 django.request log_response 359158 Internal Server Error: /api/workout
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/utils/deprecation.py", line 125, in __call__
+    response = self.process_request(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/middleware/common.py", line 54, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "/home/king/bootcamp_task/wsomething7/portfolio/poncho/myvenv/lib/python3.10/site-packages/django/middleware/common.py", line 88, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/workout/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2024-02-13 21:08:44,869 django.server Thread-3 (process_request_thread) 139880701093440 basehttp basehttp.py 179 django.server log_message 359158 "POST /api/workout HTTP/1.1" 500 82186
+WARNING 2024-02-13 21:09:10,559 django.request Thread-6 (process_request_thread) 139880658081344 log log.py 225 django.request log_response 359158 Not Found: /api/workout,m
+WARNING 2024-02-13 21:09:10,560 django.server Thread-6 (process_request_thread) 139880658081344 basehttp basehttp.py 179 django.server log_message 359158 "GET /api/workout,m HTTP/1.1" 404 4188
+WARNING 2024-02-17 20:33:50,314 django.request Thread-1 (process_request_thread) 139750375679552 log log.py 225 django.request log_response 133606 Not Found: /favicon.ico
+WARNING 2024-02-17 20:33:50,318 django.server Thread-1 (process_request_thread) 139750375679552 basehttp basehttp.py 179 django.server log_message 133606 "GET /favicon.ico HTTP/1.1" 404 3716
+WARNING 2024-02-17 20:36:47,152 django.server Thread-3 (process_request_thread) 139750367286848 basehttp basehttp.py 179 django.server log_message 133606 "POST /logout/ HTTP/1.1" 403 2506
+WARNING 2024-02-17 20:39:17,572 django.server Thread-1 (process_request_thread) 139939941434944 basehttp basehttp.py 179 django.server log_message 136133 "POST /logout/ HTTP/1.1" 403 2506
+WARNING 2024-02-17 20:39:23,430 django.server Thread-1 (process_request_thread) 139939941434944 basehttp basehttp.py 179 django.server log_message 136133 "POST /logout/ HTTP/1.1" 403 2506
+WARNING 2024-02-17 20:39:29,033 django.server Thread-1 (process_request_thread) 139939941434944 basehttp basehttp.py 179 django.server log_message 136133 "POST /logout/ HTTP/1.1" 403 2506
+WARNING 2024-02-17 20:40:47,388 django.server Thread-1 (process_request_thread) 139939941434944 basehttp basehttp.py 179 django.server log_message 136133 "POST /logout/ HTTP/1.1" 403 2506
+WARNING 2024-02-17 20:43:26,313 django.server Thread-2 (process_request_thread) 139725544351296 basehttp basehttp.py 179 django.server log_message 136974 "POST /logout/ HTTP/1.1" 403 2506
+ERROR 2024-02-17 20:45:52,085 django.request Thread-4 (process_request_thread) 139725544351296 log log.py 225 django.request log_response 136974 Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/utils/decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/poncho/accounts/views.py", line 26, in signup_view
+    return render(request, 'accounts/signup.html', {'form': form})
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/engine.py", line 163, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/engine.py", line 145, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loaders/base.py", line 29, in get_template
+    return Template(
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 199, in compile_nodelist
+    return parser.parse()
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 508, in parse
+    raise self.error(token, e)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 506, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 284, in do_extends
+    nodelist = parser.parse()
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 508, in parse
+    raise self.error(token, e)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 506, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 222, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 574, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 8: 'block'. Looking for one of: endblock.
+ERROR 2024-02-17 20:45:52,109 django.server Thread-4 (process_request_thread) 139725544351296 basehttp basehttp.py 179 django.server log_message 136974 "GET /accounts/signup/ HTTP/1.1" 500 184976
+ERROR 2024-02-17 20:53:30,524 django.request Thread-4 (process_request_thread) 139725544351296 log log.py 225 django.request log_response 136974 Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/poncho/accounts/views.py", line 44, in login_view
+    return render(request, 'accounts/login.html', {'form': form})
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/template/defaulttags.py", line 445, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/urls/base.py", line 86, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/king/bootcamp_task/wsomething7/application/poncho/myvenv/lib/python3.10/site-packages/django/urls/resolvers.py", line 731, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'password_reset' not found. 'password_reset' is not a valid view function or pattern name.
+ERROR 2024-02-17 20:53:30,535 django.server Thread-4 (process_request_thread) 139725544351296 basehttp basehttp.py 179 django.server log_message 136974 "POST /accounts/login/ HTTP/1.1" 500 182645
