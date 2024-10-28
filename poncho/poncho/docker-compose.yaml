@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: poncho-mongodb
+    environment:
+      MONGO_INITDB_DATABASE: ${DATABASE_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    hostname: mongodb
+    expose:
+      - 27017
+    volumes: 
+      - data-mongodb:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+    networks:
+      - poncho-net
+
+  web:
+    image: poncho-web:latest
+    expose:
+      - 8000
+    container_name: django-poncho
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    env_file:
+      - ./envfile
+    networks:
+      - poncho-net
+      - poncho-nginx-net
+
+  nginx:
+    image: poncho-nginx:latest
+    container_name: poncho-nginx-proxy
+    expose:
+      - 80
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - poncho-nginx-net
+    
+
+volumes:
+  data-mongodb:
+
+networks:
+  poncho-net:
+  poncho-nginx-net:

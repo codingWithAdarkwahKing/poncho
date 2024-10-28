@@ -1,0 +1,311 @@
+pipeline {
+
+  agent any
+
+  environment {
+    AWS_ECR_REPO = "644435390668.dkr.ecr.ap-south-1.amazonaws.com/king-poncho"
+    PONCHO_IMAGE = "poncho-web:latest"
+    PONCHO_NGINX_IMAGE = "poncho-nginx:latest"
+    PONCHO_IMAGE_TAG = "app"
+    PONCHO_NGINX_IMAGE_TAG = "nginx"
+    INSTANCE_IP = 'localhost'
+    PATCH_TAG = 0
+    FINAL_TAG = ''
+    DJANGO_TEST = "django-test:v0.1"
+  }
+  triggers {
+    gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
+  }
+  options {
+	  timestamps()
+      gitLabConnection('gitconnect')
+  }
+
+  stages {
+
+    stage("Checkout") {
+        when {
+            anyOf {
+                branch "main"
+                branch "feature/*"
+            }
+        }
+        steps {
+            cleanWs()
+            checkout scm
+        }
+    }
+
+    stage("Build & Package") {
+        when {
+            anyOf {
+                branch "main"
+                branch "feature/*"
+            }
+        }
+        steps {
+            script {
+
+                withCredentials([file(credentialsId: 'poncho-env', variable: 'mySecretEnvFile')]){
+                    sh 'cp $mySecretEnvFile $WORKSPACE'
+                    sh 'mv $mySecretEnvFile .env'
+                }
+                sh """
+                    docker compose down -v
+                    mkdir logs media
+
+                    echo "=========================="
+                    echo 'Build stage on going!'
+                    echo "=========================="
+                    docker build -t ${PONCHO_IMAGE} -f Dockerfile .
+                    docker build -t ${PONCHO_NGINX_IMAGE} -f Dockerfile.nginx .
+                    docker compose up -d
+                    sleep 15
+                """
+            }
+        }
+    }
+
+    stage("Unit Test") {
+        when {
+            anyOf {
+                branch "main"
+                branch "feature/*"
+            }
+        }
+        steps {
+            script {
+                def networkName = sh(script: 'docker network ls | grep poncho-net | awk \'{print $2}\'', returnStdout: true).trim()
+                echo "Docker network name: ${networkName}"
+                
+                sh """
+                    curl http://kingasare.chickenkiller.com:80
+                    echo 'Unit Test be that!'
+                    docker build -t ${DJANGO_TEST} -f Dockerfile.test .
+                    echo "=========================="
+                    echo "Application functionality test"
+                    echo "=========================="
+                    docker run --name ponchotest --network ${networkName} ${DJANGO_TEST}
+                """
+
+            }
+        }
+    }
+
+    stage("E2E Test") {
+        when {
+            anyOf {
+                branch "main"
+            }
+        }
+        steps {
+            echo "=========================================="
+            echo "***E2E test on going****"
+            echo "=========================================="
+            script {
+                sh """
+                    echo 'Starting E2E test!'
+                    echo '-----------------------------'
+                    chmod +x e2e.sh
+                    ./e2e.sh > e2e_output.log 2>&1
+                    cat e2e_output.log
+
+                """
+                emailext body: readFile('e2e_output.log'), recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'End-to-end Test Results'
+            }
+        }
+    }
+    
+
+    stage('Tag') {
+        when {
+            anyOf {
+                branch "main"
+            }
+        }
+        steps {
+            script {
+                echo "=========================================="
+                echo "***Tag Calculation****"
+                echo "=========================================="
+                sshagent(credentials: ['poncho-portfolio']) {
+                    def v_txt_content = readFile('v.txt').trim()
+                    def major_minor = v_txt_content.split(',')[0].trim()
+                    def v_major_minor = major_minor.split('\\.')[0..1].join('.')
+                    echo "$v_major_minor"
+                    sh "git fetch --tags"
+
+                    def check_tag = sh(script: 'git tag --sort=-version:refname --merged=$(git rev-parse --abbrev-ref HEAD) | head -1', returnStdout: true).trim()                    
+                    echo "$check_tag"
+                    if (check_tag) {
+                        echo "Tag: ${check_tag}"
+                        def currentMajorMinor = "${check_tag.split('\\.')[0]}.${check_tag.split('\\.')[1]}"
+                        if (currentMajorMinor == v_major_minor) {
+                            PATCH_TAG = Integer.parseInt(check_tag.split('\\.')[2]) + 1 
+                            echo "$PATCH_TAG"
+                            FINAL_TAG = "${check_tag.split('\\.')[0]}.${check_tag.split('\\.')[1]}.$PATCH_TAG"
+                        } else {
+                            echo "Current Major and Minor and Release Major don't match"
+                        }
+                    } else {
+                        echo "Tag Checking returned an empty value"
+                        echo "On to creation of a new release version"
+                        def v_major_minor_array = v_major_minor.split('\\.')
+                        FINAL_TAG = "${v_major_minor_array[0]}.${v_major_minor_array[1]}.0"
+                        echo "The new patch tag is: $FINAL_TAG "
+                    }
+                    
+                }
+
+                sshagent(credentials: ['poncho-portfolio']) {
+                    echo "=========================================="
+                    echo "***Tag and Push****"
+                    echo "=========================================="
+                    sh 'git reset --hard'
+                    sh "git tag -a $FINAL_TAG -m 'Version $FINAL_TAG'"
+                    sh "git push origin $FINAL_TAG"
+                }
+            }
+        }
+    }
+
+
+    stage("Publish") {
+        when {
+            anyOf {
+                branch "main"
+            }
+        }
+        steps {
+            echo "=========================================="
+            echo "***Publishing underway****"
+            echo "=========================================="
+            sh """
+            aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 644435390668.dkr.ecr.ap-south-1.amazonaws.com
+            docker tag ${PONCHO_IMAGE} ${AWS_ECR_REPO}:${PONCHO_IMAGE_TAG}-${FINAL_TAG}
+            docker tag ${PONCHO_NGINX_IMAGE} ${AWS_ECR_REPO}:${PONCHO_NGINX_IMAGE_TAG}-${FINAL_TAG}
+            docker push ${AWS_ECR_REPO}:${PONCHO_IMAGE_TAG}-${FINAL_TAG}
+            docker push ${AWS_ECR_REPO}:${PONCHO_NGINX_IMAGE_TAG}-${FINAL_TAG}
+            """
+            sh """
+                docker compose down -v            
+            """
+        }
+    }
+
+    stage("Deploy") {
+        when {
+            anyOf {
+                branch "main"
+            }
+        }
+        steps {
+            echo "=========================================="
+            echo "***Deployment on going****"
+            echo "=========================================="
+            script {
+                sh "mkdir gitops"
+                dir('gitops') {
+
+                    sh """
+                        echo 'Deployment started!'
+                        
+                    """
+                    git branch: 'main', credentialsId: 'gitops-repo-credentials-id', url: 'git@gitlab.com:kingasare/poncho-gitops-conf.git'
+                    
+                    def valuesYamlPath = './charts/poncho/values.yaml'
+                    def helmChartPath = './charts/poncho/.'
+                    def helmChartName = 'poncho'
+                    def newTag = "${PONCHO_IMAGE_TAG}-${FINAL_TAG}"
+                    def newTagNginx = "${PONCHO_NGINX_IMAGE_TAG}-${FINAL_TAG}"
+
+                    sshagent(credentials: ['gitops-repo-credentials-id']) {
+                        sh "sed -i 's/tag: .*/tag: ${newTag}/' ${valuesYamlPath}"
+                        sh "sed -i 's/tagnginx: .*/tagnginx: ${newTagNginx}/' ${valuesYamlPath}"
+                        sh "helm package ${helmChartPath} --app-version ${FINAL_TAG}"
+                        def helmVersion = sh(script: "awk '/^version:/ { print \$2 }' ./charts/poncho/Chart.yaml", returnStdout: true).trim()
+                        echo "$helmVersion"
+                        def helmName = sh(script: "awk '/^name:/ { print \$2 }' ./charts/poncho/Chart.yaml", returnStdout: true).trim()
+                        echo "$helmName"
+
+                        
+                        sh '''
+                            git config --global user.email "jenkins@gmail.com"
+                            git config --global user.name "Jenkins"
+                            git add .
+                            git commit -m "Update image tag"
+                            git push --set-upstream origin main
+                        '''
+                        sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 644435390668.dkr.ecr.ap-south-1.amazonaws.com/poncho"
+                        def chartFileName = sh(script: "ls -1 *.tgz | head -n 1", returnStdout: true).trim()
+                        sh "helm push ${chartFileName} oci://644435390668.dkr.ecr.ap-south-1.amazonaws.com/"
+
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    stage("Cleanup") {
+        when {
+            anyOf {
+                branch "main"
+            }
+        }
+        steps {
+            echo "=========================================="
+            echo "***Cleanup on going****"
+            echo "=========================================="
+            script {
+                sh """
+                    echo 'Cleanup started!'
+                    docker rmi -f ${AWS_ECR_REPO}:${PONCHO_IMAGE_TAG}-${FINAL_TAG}
+                    docker rmi -f ${AWS_ECR_REPO}:${PONCHO_NGINX_IMAGE_TAG}-${FINAL_TAG}
+                """
+            
+            }
+        }
+    }
+
+
+  }
+
+  post {
+    always {
+        sh """
+            docker rm -f django-poncho poncho-mongodb poncho-nginx-proxy ponchotest
+            docker rmi ${PONCHO_NGINX_IMAGE} ${PONCHO_IMAGE} ${DJANGO_TEST}
+        """
+        cleanWs()
+    }
+    success {
+            script {
+                echo "Build was successful."
+                echo "Sending success email..."
+                emailext (
+                    subject: "Build Successful: Job '$BUILD_TAG'",
+                    body: "The build of '$JOB_NAME' on Jenkins has finished successfully.",
+                    from: 'Jenkins',
+                    to: emailextrecipients([culprits(), upstreamDevelopers(), developers()]),
+                )
+                currentBuild.result = "SUCCESS"
+            }
+        }
+        failure {
+            script {
+                echo "Build failed."
+                echo "Sending failure email..."
+                emailext (
+                        subject: "Build failed: Job '$BUILD_TAG'",
+                        body: "The build of '$JOB_NAME' on Jenkins has finished Unsuccessfully.",
+                        from: 'Jenkins',
+                        to: emailextrecipients([culprits(), upstreamDevelopers(), developers()]),
+                    )
+                currentBuild.result = "FAILURE"
+            }
+        }
+  }
+
+}
